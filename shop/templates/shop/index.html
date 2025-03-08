@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>{{title}}</title>
+{% endblock title %}
+
+{% block main %}
+<main>
+    <!-- slider area start -->
+    {% block slider %}
+    {% include 'shop/components/_slider.html' %}
+    {% endblock slider %}
+    <!-- slider area end -->
+
+    <!-- category area start -->
+    {% block categories %}
+    {% include 'shop/components/_categories.html' %}
+    {% endblock categories %}
+    <!-- category area end -->
+
+    <!-- product area start -->
+
+    <!-- product area end -->
+
+    <!-- banner area start -->
+    {% block banner_first %}
+    {% include 'shop/components/_banner_first.html' %}
+    {% endblock banner_first %}
+    <!-- banner area end -->
+
+    <!-- features area start -->
+    {% block features %}
+    {% include 'shop/components/_features.html' %}
+    {% endblock features %}
+    <!-- features area end -->
+
+    <!-- product area start -->
+    <!-- product area end -->
+
+    <!-- banner area start -->
+    {% block banner_second %}
+    {% include 'shop/components/_banner_second.html' %}
+    {% endblock banner_second %}
+    <!-- banner area end -->
+
+    <!-- product trending area start -->
+    {% block handpicked %}
+    {% include 'shop/components/_handpicked.html' %}
+    {% endblock handpicked %}
+    <!-- product trending area end -->
+</main>
+{% endblock main %}

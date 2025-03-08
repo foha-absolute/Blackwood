@@ -1,0 +1,60 @@
+{% load static %}
+<section class="product__area-trending pb-85">
+        <div class="container">
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="product__item-wrapper">
+                        <div class="product__top section__title-line d-sm-flex align-items-start mb-35">
+                            <div class="section__title-wrapper mr-30">
+                                <h3 class="section__title">Handpicked</h3>
+                            </div>
+                            <div class="product__tab">
+                                <ul class="nav nav-tabs" id="myTab2" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="new-3-tab" data-bs-toggle="tab" data-bs-target="#new-3" type="button" role="tab" aria-controls="new-3" aria-selected="true">New</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xxl-12">
+                    <div class="product__tab-content">
+                        <div class="tab-content" id="myTab2Content">
+                            <div class="tab-pane fade show active" id="new-3" role="tabpanel" aria-labelledby="new-3-tab">
+                                <div class="product__item-trending-slider common-nav owl-carousel">
+                                    {% for product in products %}
+                                    <div class="product__item mb-20">
+                                        <div class="product__thumb w-img fix">
+                                            <a href="{% url 'product_details_url' product.SKU %}">
+                                                <img src={{product.thumbnail.url}} alt="">
+                                            </a>
+                                            <div class="product__action transition-3">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="product__content text-center">
+                                            <div class="product__tag">
+                                                <span>
+                                                    <a>{{product.category}}</a>
+                                                </span>
+                                            </div>
+                                            <h3 class="product__title">
+                                                <a href="{% url 'product_details_url' product.SKU %}">{{product.title}}</a>
+                                            </h3>
+                                            <div class="product__price">
+                                                <span class="price">${{product.price}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

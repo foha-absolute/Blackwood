@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>{{title}}</title>
+{% endblock title %}
+
+{% block main %}
+<main>
+            <!-- page__title-start -->
+            <section class="page__title p-relative d-flex align-items-center" data-background="assets/img/bg/page-title-1.jpg" style="background-image: url(&quot;assets/img/page-title/page-title-1.jpg&quot;);">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="page__title-inner text-center">
+                                <h1>Shop</h1>
+                                <div class="page__title-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb justify-content-center">
+                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Shop</li>
+                                    </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- page__title-end -->
+
+            <!-- product-details-start -->
+            <section class="shop-details pt-90 pb-90">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xxl-3 col-xl-4">
+                            <div class="pproduct-sidebar-area mr-60">
+                                <div class="product-widget mb-30">
+                                    <h5 class="pt-title mb-20">Product categories</h5>
+                                    <div class="widget-category-list">
+                                        <form action="get">
+                                            {% for category in categories %}
+                                            <a href="{% url 'products_by_category_url' category.slug %}">
+                                            <div class="single-widget-category">
+                                                <a href="{% url 'products_by_category_url' category.slug %}">{{category.title}}</a>
+                                            </div>
+                                            </a>
+                                            {% endfor %}
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="product-widget mb-30">
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-xxl-9 col-xl-8">
+                            <div class="shop-top-area mb-20">
+                                <div class="row">
+                                    <div class="col-xxl-4 col-xl-2 col-md-3 col-sm-3">
+                                        <div class="shop-top-left">
+                                            <span class="label mr-15">View:</span>
+                                            <div class="nav d-inline-block tab-btn-group" id="nav-tab" role="tablist">
+                                                <button class="active" data-bs-toggle="tab" data-bs-target="#tab1" type="button"><i class="fas fa-border-none"></i></button>
+                                                <button data-bs-toggle="tab" data-bs-target="#tab2" type="button" class=""><i class="fas fa-list"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="shop-main-area mb-40">
+                                <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade active show" id="tab1">
+                                        <div class="row">
+                                            {% for product in products %}
+                                            <div class="col-xxl-3 col-xl-4 col-lg-4 col-md-6">
+                                                <div class="product__item mb-20">
+                                                    <div class="product__thumb w-img fix">
+                                                        <a href="{% url 'product_details_url' product.SKU %}">
+                                                            <img src={{product.thumbnail.url}} alt="">
+                                                        </a>
+                                                        <div class="product__flash-4">
+                                                            {% if product.discount > 0 %}
+                                                            <span>{{product.discount}}%</span>
+                                                            {%else%}
+                                                            {%endif%}
+                                                        </div>
+                                                    </div>
+                                                    <div class="product__content">
+                                                        <div class="product__tag product__tag-4">
+                                                            <span>
+                                                                <a href="shop.html">{{product.category}}</a>
+                                                            </span>
+                                                        </div>
+                                                        <h3 class="product__title">
+                                                            <a href="{% url 'product_details_url' product.SKU %}">{{product.title}}</a>
+                                                        </h3>
+                                                        <div class="product__price product__price-4 mb-10">
+                                                            <span class="price">${{product.price}}</span>
+                                                        </div>
+                                                        <div class="product__select-button">
+                                                            <a href="{% url 'product_details_url' product.SKU %}" class="select-btn w-100">Select Options</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab2">
+                                        <div class="row">
+                                            <div class="productwrap">
+                                                {% for product in products %}
+                                                <div class="single-product mb-30 wood-list-product-wrap">
+                                                    <div class="row align-items-xl-center">
+                                                        <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
+                                                            <div class="product-thumb mr-30 product-thumb-list w-img">
+                                                                <img src={{product.thumbnail.url}} alt="#">
+                                                                <img src={{product.thumbnail.url}} alt="#">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xxl-8 col-xl-8 col-lg-8 col-md-8">
+                                                            <div class="wood-product-content wood-product-list-content">
+                                                                <h4 class="pro-title pro-title-1"><a href="{% url 'product_details_url' product.SKU %}">{{product.title}}</a></h4>
+                                                                <div class="pro-price">
+                                                                    <span>{{product.price}}</span>
+                                                                </div>
+
+                                                                <p>{{product.short_desc}}</p>
+                                                                <div class="wood-shop-product-actions">
+                                                                    <a href="{% url 'add_cart_url' product.SKU %}" class="wood-cart-btn">Add to cart</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- product-details-end -->
+
+            <!-- shop modal start -->
+            <div class="modal fade" id="productModalId" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered product__modal" role="document">
+                    <div class="modal-content">
+                        <div class="product__modal-wrapper p-relative">
+                            <div class="product__modal-close p-absolute">
+                                <button data-bs-dismiss="modal"><i class="fal fa-times"></i></button>
+                            </div>
+                            <div class="product__modal-inner">
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                        <div class="product__modal-box">
+                                            <div class="tab-content" id="modalTabContent">
+                                                <div class="tab-pane fade show active" id="nav1" role="tabpanel" aria-labelledby="nav1-tab">
+                                                    <div class="product__modal-img w-img">
+                                                        <img src="{% static 'img/products/quick-view/quick-view-1.jpg' %}" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="nav2" role="tabpanel" aria-labelledby="nav2-tab">
+                                                    <div class="product__modal-img w-img">
+                                                        <img src="{% static 'img/products/quick-view/quick-view-2.jpg' %}" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="nav3" role="tabpanel" aria-labelledby="nav3-tab">
+                                                    <div class="product__modal-img w-img">
+                                                        <img src="{% static 'img/products/quick-view/quick-view-3.jpg' %}" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="nav4" role="tabpanel" aria-labelledby="nav4-tab">
+                                                    <div class="product__modal-img w-img">
+                                                        <img src="{% static 'img/products/quick-view/quick-view-4.jpg' %}" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <ul class="nav nav-tabs" id="modalTab" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                <button class="nav-link active" id="nav1-tab" data-bs-toggle="tab" data-bs-target="#nav1" type="button" role="tab" aria-controls="nav1" aria-selected="true">
+                                                        <img src="{% static 'img/products/quick-view/nav/quick-nav-1.jpg' %}" alt="">
+                                                </button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="nav2-tab" data-bs-toggle="tab" data-bs-target="#nav2" type="button" role="tab" aria-controls="nav2" aria-selected="false">
+                                                    <img src="{% static 'img/products/quick-view/nav/quick-nav-2.jpg' %}" alt="">
+                                                </button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="nav3-tab" data-bs-toggle="tab" data-bs-target="#nav3" type="button" role="tab" aria-controls="nav3" aria-selected="false">
+                                                    <img src="{% static 'img/products/quick-view/nav/quick-nav-3.jpg' %}" alt="">
+                                                </button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="nav4-tab" data-bs-toggle="tab" data-bs-target="#nav4" type="button" role="tab" aria-controls="nav4" aria-selected="false">
+                                                    <img src="{% static 'img/products/quick-view/nav/quick-nav-4.jpg' %}" alt="">
+                                                </button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                    <div class="product__modal-content">
+                                        <h4 class="product__modal-title"><a href="product-details.html">Samsung C49J89: £875, Debenhams Plus</a></h4>
+                                        <div class="product__modal-des mb-40">
+                                            <p>Typi non habent claritatem insitam, est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt </p>
+                                        </div>
+                                        <div class="product__modal-stock">
+                                            <span>Availability :</span>
+                                            <span>In Stock</span>
+                                        </div>
+                                        <div class="product__modal-stock sku mb-30">
+                                            <span>SKU:</span>
+                                            <span>Samsung C49J89: £875, Debenhams Plus</span>
+                                        </div>
+                                        <div class="product__modal-review d-sm-flex">
+                                            <div class="rating mb-15 mr-35">
+                                            <ul>
+                                                <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fal fa-star"></i></a></li>
+                                            </ul>
+                                            </div>
+                                            <div class="product__modal-add-review mb-15">
+                                            <span><a href="#">1 Review</a></span>
+                                            <span><a href="#">Add Review</a></span>
+                                            </div>
+                                        </div>
+                                        <div class="product__modal-price">
+                                            <span>$560.00</span>
+                                        </div>
+                                        <div class="product__modal-form mb-30">
+                                            <form action="#">
+                                            <div class="pro-quan-area d-lg-flex align-items-center">
+                                                <div class="product-quantity mr-20 mb-25">
+                                                    <div class="cart-plus-minus p-relative"><input type="text" value="1" /></div>
+                                                </div>
+                                                <div class="pro-cart-btn mb-25">
+                                                    <a href="cart.html" class="add-to-cart-btn">Add to cart</a>
+                                                </div>
+                                            </div>
+                                            </form>
+                                        </div>
+                                        <div class="product__modal-links">
+                                            <ul>
+                                            <li><a href="#" title="Add to Wishlist"><i class="fal fa-heart"></i></a></li>
+                                            <li><a href="#" title="Compare"><i class="far fa-sliders-h"></i></a></li>
+                                            <li><a href="#" title="Print"><i class="fal fa-print"></i></a></li>
+                                            <li><a href="#" title="Print"><i class="fal fa-share-alt"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- shop modal end -->
+
+        </main>
+{% endblock main %}

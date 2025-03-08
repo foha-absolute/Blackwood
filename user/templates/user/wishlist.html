@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>{{title}}</title>
+{% endblock title %}
+
+{% block main %}
+<main>
+            <!-- page__title-start -->
+            <section class="page__title p-relative d-flex align-items-center" data-background="assets/img/bg/page-title-1.jpg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="page__title-inner text-center">
+                                <h1>Your Wishlist</h1>
+                                <div class="page__title-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb justify-content-center">
+                                        <li class="breadcrumb-item"><a href="{% url 'index_url' %}">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Wishlist</li>
+                                    </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- page__title-end -->
+
+            <!-- cart-area start -->
+            <section class="cart-area pb-120 pt-120">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <form action="#">
+                                <div class="table-content table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="product-thumbnail">Images</th>
+                                                <th class="cart-product-name">Product</th>
+                                                <th class="product-price">Unit Price</th>
+                                                <th class="product-quantity">Quantity</th>
+                                                <th class="product-remove">Remove</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for favorite in favorites %}
+                                            <tr>
+                                                <td class="product-thumbnail"><a href="product-details.html"><img src={{favorite.product.thumbnail.url}} alt=""></a></td>
+                                                <td class="product-name"><a href="product-details.html">{{favorite.product.title}}</a></td>
+                                                <td class="product-price"><span class="amount">${{favorite.product.price}}</span></td>
+                                                <td class="product-quantity">
+                                                    <a href="{% url 'add_cart_url' favorite.product.SKU %}" class="btn-tp">Add To Cart</a>
+                                                </td>
+                                                <td class="product-remove"><a href="{% url 'add_wishlist_url' favorite.product.SKU %}"><i class="fa fa-times"></i></a></td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- cart-area end -->
+
+        </main>
+{% endblock main %}

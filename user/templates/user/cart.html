@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>{{title}}</title>
+{% endblock title %}
+
+{% block main %}
+<main>
+            <!-- page__title-start -->
+            <section class="page__title p-relative d-flex align-items-center" data-background="{% static 'img/bg/page-title-1.jpg' %}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="page__title-inner text-center">
+                                <h1>Your Cart</h1>
+                                <div class="page__title-breadcrumb">
+                                    <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb justify-content-center">
+                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                                    </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- page__title-end -->
+
+            <!-- cart-area start -->
+            <section class="cart-area pt-120 pb-120">
+                <div class="container">
+                   <div class="row">
+                      <div class="col-12">
+                            <form action="">
+                               <div class="table-content table-responsive">
+                                  <table class="table">
+                                        <thead>
+                                           <tr>
+                                              <th class="product-thumbnail">Images</th>
+                                              <th class="cart-product-name">Product</th>
+                                              <th class="product-price">Unit Price</th>
+                                              <th class="product-quantity">Quantity</th>
+<!--                                              <th class="product-subtotal">Total</th>-->
+                                              <th class="product-remove">Remove</th>
+                                           </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for item in cart %}
+                                           <tr>
+                                              <td class="product-thumbnail"><a href="{% url 'product_details_url' item.product.SKU %}"><img src="{{item.product.thumbnail.url}}" alt=""></a></td>
+                                              <td class="product-name"><a href="{% url 'product_details_url' item.product.SKU %}">{{ item.product.title }}</a></td>
+                                              <td class="product-price"><span class="amount">${{item.product.price }}</span></td>
+                                              <td class="product-quantity">
+                                                  {{ item.quantity }}
+                                              </td>
+
+                                              <td class="product-remove"><a href="{% url 'remove_cart_url' item.product.SKU %}"> <i class="fa fa-times"></i></a></td>
+                                           </tr>
+{% endfor %}
+                                        </tbody>
+                                  </table>
+                               </div>
+                               <div class="row justify-content-end">
+                                  <div class="col-md-5">
+                                        <div class="cart-page-total">
+                                           <h2>Cart totals</h2>
+                                           <ul class="mb-20">
+                                              <li>Total <span>${{ total_price }}</span></li>
+                                           </ul>
+                                        </div>
+                                  </div>
+                               </div>
+                            </form>
+                      </div>
+                   </div>
+                </div>
+            </section>
+            <!-- cart-area end -->
+
+        </main>
+{% endblock main %}

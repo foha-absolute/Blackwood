@@ -1,0 +1,26 @@
+{% load static %}
+<section class="slider__area">
+        <div class="slider__active swiper-container">
+            <div class="swiper-wrapper">
+
+                <div class="slider__item slider__height swiper-slide d-flex align-items-center include-bg" data-background="{% static 'img/slider/banner.jpg' %}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xxl-5">
+                                <div class="slider__content p-relative z-index-11">
+                                    <h3 class="slider__title" data-animation="fadeInUp" data-delay=".5s" style="color:black">Welcome to BlackWood</h3>
+                                    <div class="slider__btn" data-animation="fadeInUp" data-delay=".4s">
+                                        <a href="{% url 'shop_url' %}" class="slider-btn" style="color:black">Discover Now <i class="fal fa-angle-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-slider-pagination">
+                <button class="main-slider-button-prev"><i class="fal fa-angle-left"></i></button>
+                <button class="main-slider-button-next"><i class="fal fa-angle-right"></i></button>
+            </div>
+        </div>
+    </section>
